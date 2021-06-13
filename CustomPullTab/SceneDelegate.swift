@@ -18,7 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         window = .init(windowScene: scene)
-        window?.rootViewController = UINavigationController(rootViewController: ViewController())
+        let viewOne = AmountSelectionView()
+        let viewTwo = DurationSelectionView()
+        let viewThree = PaymentModeSelectionView()
+        window?.rootViewController = UINavigationController(rootViewController: ViewController(customViews: [viewOne, viewTwo, viewThree]))
         window?.makeKeyAndVisible()
     }
 
