@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: BaseViewController {
+class ViewController: PullTabViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
