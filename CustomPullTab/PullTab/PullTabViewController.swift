@@ -11,6 +11,10 @@ class PullTabViewController: UIViewController {
 
     private var customViews: [BaseCustomView] = []
     private var customViewTopYPoint: CGFloat = 0
+    private var topViewStartPoint: CGFloat {
+        return view.frame.height * 2 / 3
+    }
+    
     private var customViewsCount: Int {
         return customViews.count
     }
@@ -50,11 +54,15 @@ private extension ViewSetup {
     
     func pullViewAtIndex(index: Int) {
         guard index < customViews.count else { return }
-        let customView = customViews[index]
+        let currentCustomView = customViews[index]
+        
+        let diff = index == customViews.count - 1 ? 1 : index
+        let height = topViewStartPoint - (Constants.verticalViewPadding * CGFloat(diff))
+
         customViewTopYPoint = view.frame.height - Constants.verticalViewPadding
-        customView.frame = CGRect(x: 0, y: customViewTopYPoint, width: view.frame.width, height: 150)
-        print(customView)
-        view.addSubview(customView)
+        currentCustomView.frame = CGRect(x: 0, y: customViewTopYPoint, width: view.frame.width, height: height)
+
+        view.addSubview(currentCustomView)
     }
     
 }
@@ -65,7 +73,7 @@ extension ViewTapGestureHandler: CustomViewDelegate {
     func handleTapGesture() {
         guard currentVisibleViewIndex < customViews.count else { return }
         let currentView = customViews[currentVisibleViewIndex]
-        let screenSize = -500 + customViewHeightBuffer
+        let screenSize = -topViewStartPoint + customViewHeightBuffer
         UIView.animate(withDuration: 0.3, delay: 0.0, options:[], animations: {
             currentView.transform = CGAffineTransform(translationX: 0, y: screenSize)
             }, completion: nil)
@@ -85,7 +93,7 @@ private typealias Constant = PullTabViewController
 private extension Constant {
     
     enum Constants {
-        static let verticalViewPadding: CGFloat = 50
+        static let verticalViewPadding: CGFloat = 80
     }
     
 }
