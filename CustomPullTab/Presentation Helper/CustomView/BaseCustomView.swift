@@ -11,7 +11,7 @@ protocol CustomViewDelegate {
     func handleTapGesture()
 }
 
-class BaseCustomView: UIView {
+open class BaseCustomView: UIView {
     
     var delegate: CustomViewDelegate?
     
@@ -19,9 +19,14 @@ class BaseCustomView: UIView {
         super.init(frame: frame)
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         addGestureRecognizer(tap)
+        setupViews()
     }
     
-    required init?(coder: NSCoder) {
+    func setupViews() {
+        
+    }
+    
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

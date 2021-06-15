@@ -11,7 +11,8 @@ class DurationSelectionView: BaseCustomView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .brown
+        
+        print("in DurationSelectionView")
     }
     
     required init?(coder: NSCoder) {

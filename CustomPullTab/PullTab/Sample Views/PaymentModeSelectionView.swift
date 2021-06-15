@@ -11,7 +11,8 @@ class PaymentModeSelectionView: BaseCustomView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .red
+      
+        print("in PaymentModeSelectionView")
     }
     
     required init?(coder: NSCoder) {

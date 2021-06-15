@@ -17,6 +17,11 @@
 		EEDC95E126768B4E00C654E4 /* DurationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC95E026768B4E00C654E4 /* DurationSelectionView.swift */; };
 		EEDC95E42676909000C654E4 /* PaymentModeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC95E32676909000C654E4 /* PaymentModeSelectionView.swift */; };
 		EEDC95E82676966C00C654E4 /* BaseCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC95E72676966C00C654E4 /* BaseCustomView.swift */; };
+		EEDC95F42677DC5E00C654E4 /* BasePullTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC95F32677DC5E00C654E4 /* BasePullTabViewController.swift */; };
+		EEDC95F72677DC7B00C654E4 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC95F62677DC7B00C654E4 /* CustomViewController.swift */; };
+		EEDC95FB2677DDF900C654E4 /* AmountSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC95FA2677DDF900C654E4 /* AmountSelectionViewController.swift */; };
+		EEDC95FE2677DE0500C654E4 /* DurationSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC95FD2677DE0500C654E4 /* DurationSelectionViewController.swift */; };
+		EEDC96012677DE1100C654E4 /* PaymentModeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC96002677DE1100C654E4 /* PaymentModeSelectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,11 @@
 		EEDC95E026768B4E00C654E4 /* DurationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationSelectionView.swift; sourceTree = "<group>"; };
 		EEDC95E32676909000C654E4 /* PaymentModeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModeSelectionView.swift; sourceTree = "<group>"; };
 		EEDC95E72676966C00C654E4 /* BaseCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCustomView.swift; sourceTree = "<group>"; };
+		EEDC95F32677DC5E00C654E4 /* BasePullTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePullTabViewController.swift; sourceTree = "<group>"; };
+		EEDC95F62677DC7B00C654E4 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
+		EEDC95FA2677DDF900C654E4 /* AmountSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountSelectionViewController.swift; sourceTree = "<group>"; };
+		EEDC95FD2677DE0500C654E4 /* DurationSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationSelectionViewController.swift; sourceTree = "<group>"; };
+		EEDC96002677DE1100C654E4 /* PaymentModeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModeSelectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +92,7 @@
 		EEDC95DC26768B1600C654E4 /* Sample Views */ = {
 			isa = PBXGroup;
 			children = (
+				EEDC95F92677DDDB00C654E4 /* Sample View Controllers */,
 				EEDC95DD26768B3C00C654E4 /* AmountSelectionView.swift */,
 				EEDC95E026768B4E00C654E4 /* DurationSelectionView.swift */,
 				EEDC95E32676909000C654E4 /* PaymentModeSelectionView.swift */,
@@ -93,6 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				EEDC95E72676966C00C654E4 /* BaseCustomView.swift */,
+				EEDC95F32677DC5E00C654E4 /* BasePullTabViewController.swift */,
+				EEDC95F62677DC7B00C654E4 /* CustomViewController.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -133,6 +146,16 @@
 				EEDC95E62676965900C654E4 /* CustomView */,
 			);
 			path = "Presentation Helper";
+			sourceTree = "<group>";
+		};
+		EEDC95F92677DDDB00C654E4 /* Sample View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EEDC95FA2677DDF900C654E4 /* AmountSelectionViewController.swift */,
+				EEDC95FD2677DE0500C654E4 /* DurationSelectionViewController.swift */,
+				EEDC96002677DE1100C654E4 /* PaymentModeSelectionViewController.swift */,
+			);
+			path = "Sample View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,11 +228,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEDC95E82676966C00C654E4 /* BaseCustomView.swift in Sources */,
+				EEDC96012677DE1100C654E4 /* PaymentModeSelectionViewController.swift in Sources */,
+				EEDC95F42677DC5E00C654E4 /* BasePullTabViewController.swift in Sources */,
 				EEDC95DE26768B3C00C654E4 /* AmountSelectionView.swift in Sources */,
+				EEDC95FB2677DDF900C654E4 /* AmountSelectionViewController.swift in Sources */,
 				EEDC95E126768B4E00C654E4 /* DurationSelectionView.swift in Sources */,
 				EEDC95C726763D8300C654E4 /* ViewController.swift in Sources */,
 				EEDC95DA26763F7A00C654E4 /* PullTabViewController.swift in Sources */,
+				EEDC95FE2677DE0500C654E4 /* DurationSelectionViewController.swift in Sources */,
 				EEDC95C326763D8300C654E4 /* AppDelegate.swift in Sources */,
+				EEDC95F72677DC7B00C654E4 /* CustomViewController.swift in Sources */,
 				EEDC95E42676909000C654E4 /* PaymentModeSelectionView.swift in Sources */,
 				EEDC95C526763D8300C654E4 /* SceneDelegate.swift in Sources */,
 			);

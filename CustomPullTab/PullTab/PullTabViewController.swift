@@ -52,7 +52,8 @@ private extension ViewSetup {
         guard index < customViews.count else { return }
         let customView = customViews[index]
         customViewTopYPoint = view.frame.height - Constants.verticalViewPadding
-        customView.frame = CGRect(x: 0, y: customViewTopYPoint, width: view.frame.width, height: 50)
+        customView.frame = CGRect(x: 0, y: customViewTopYPoint, width: view.frame.width, height: 150)
+        print(customView)
         view.addSubview(customView)
     }
     
