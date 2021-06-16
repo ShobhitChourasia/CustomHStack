@@ -14,6 +14,5 @@ class ViewController: PullTabViewController {
         view.backgroundColor = .white
     }
 
-
 }
 

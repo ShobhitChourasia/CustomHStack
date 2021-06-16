@@ -35,7 +35,7 @@ class PullTabViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         guard !customViews.isEmpty else { return }
         setupViews()
@@ -46,17 +46,17 @@ private typealias ViewSetup = PullTabViewController
 private extension ViewSetup {
     
     func setupViews() {
-        pullViewAtIndex(index: currentVisibleViewIndex)
+        pullViewAtIndex()
         customViews.forEach {
             $0.delegate = self
         }
     }
     
-    func pullViewAtIndex(index: Int) {
-        guard index < customViews.count else { return }
-        let currentCustomView = customViews[index]
+    func pullViewAtIndex() {
+        guard currentVisibleViewIndex < customViews.count else { return }
+        let currentCustomView = customViews[currentVisibleViewIndex]
         
-        let diff = index == customViews.count - 1 ? 1 : index
+        let diff = currentVisibleViewIndex == customViews.count - 1 ? 1 : currentVisibleViewIndex
         let height = topViewStartPoint - (Constants.verticalViewPadding * CGFloat(diff))
 
         customViewTopYPoint = view.frame.height - Constants.verticalViewPadding
@@ -80,7 +80,7 @@ extension ViewTapGestureHandler: CustomViewDelegate {
         
         currentVisibleViewIndex += 1
         customViewHeightBuffer += Constants.verticalViewPadding
-        pullViewAtIndex(index: currentVisibleViewIndex)
+        pullViewAtIndex()
 //        UIView.animate(withDuration: 0.5, delay: 0.0, options:[], animations: {
 //                let screenSize = UIScreen.main.bounds.size
 //            currentView.transform = CGAffineTransform(translationX: 0, y: screenSize.height * 0.5)

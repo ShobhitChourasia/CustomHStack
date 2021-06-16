@@ -19,11 +19,6 @@ open class BaseCustomView: UIView {
         super.init(frame: frame)
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         addGestureRecognizer(tap)
-        setupViews()
-    }
-    
-    func setupViews() {
-        
     }
     
     required public init?(coder: NSCoder) {
