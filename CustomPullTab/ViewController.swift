@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol CustomViewStateInput {
+    
+    func toggleToCollapsedView()
+    func toggleToExpandedView()
+    
+}
+
 class ViewController: PullTabViewController, PullTabViewControllerStackDelegate {
 
     private let viewControllerOne: AmountSelectionViewController
@@ -18,6 +25,8 @@ class ViewController: PullTabViewController, PullTabViewControllerStackDelegate 
         view.backgroundColor = .white
         viewControllerOne.delegate = self
         viewControllerTwo.delegate = self
+        
+        viewStatusDelegate = self
     }
 
 
@@ -42,3 +51,25 @@ class ViewController: PullTabViewController, PullTabViewControllerStackDelegate 
     
 }
 
+// MARK: - PullTabViewControllerStatusDelegate
+
+private typealias DelegateHandler = ViewController
+extension DelegateHandler: PullTabViewControllerStatusDelegate {
+    
+    func viewExpanded(view: UIView) {
+        switch view {
+        case is AmountSelectionView:
+            viewControllerOne.toggleToExpandedView()
+        case is DurationSelectionView:
+            viewControllerTwo.toggleToExpandedView()
+        case is PaymentModeSelectionView:
+            ()
+        default: break
+        }
+    }
+    
+    func viewCollapsed() {
+        
+    }
+    
+}

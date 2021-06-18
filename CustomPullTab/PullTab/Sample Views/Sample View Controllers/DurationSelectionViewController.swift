@@ -13,6 +13,7 @@ class DurationSelectionViewController: CustomViewController<DurationSelectionVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         customView.backgroundColor = .brown
     }
     
@@ -21,6 +22,19 @@ class DurationSelectionViewController: CustomViewController<DurationSelectionVie
         customView.handleButtonTappedClosure = { [weak self] in
             self?.delegate?.moveToNextView()
         }
+    }
+    
+}
+
+private typealias DurationSelectionViewInputMethod = DurationSelectionViewController
+extension DurationSelectionViewInputMethod: CustomViewStateInput {
+    
+    func toggleToCollapsedView() {
+        print("Collapsed DurationSelectionView")
+    }
+    
+    func toggleToExpandedView() {
+        print("Expanded DurationSelectionView")
     }
     
 }

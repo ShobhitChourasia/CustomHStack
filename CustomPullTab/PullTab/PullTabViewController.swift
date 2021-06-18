@@ -13,7 +13,16 @@ protocol PullTabViewControllerStackDelegate: AnyObject {
 
 }
 
+protocol PullTabViewControllerStatusDelegate: AnyObject {
+    
+    func viewCollapsed()
+    func viewExpanded(view: UIView)
+    
+}
+
 public class PullTabViewController: UIViewController {
+    
+    weak var viewStatusDelegate: PullTabViewControllerStatusDelegate?
     
     private var customViews: [BaseCustomView] = []
     private var customViewTopYPoint: CGFloat = 0
@@ -62,7 +71,7 @@ extension PullTabViewController {
 
         customViewTopYPoint = view.frame.height - Constants.verticalViewPadding
         currentCustomView.frame = CGRect(x: 0, y: customViewTopYPoint, width: view.frame.width, height: height)
-
+        
         view.addSubview(currentCustomView)
     }
     
@@ -97,6 +106,8 @@ extension ViewTapGestureHandler: CustomViewDelegate {
         UIView.animate(withDuration: 0.3, delay: 0.0, options:[], animations: {
             currentView.transform = CGAffineTransform(translationX: 0, y: screenSize)
             }, completion: nil)
+        
+        viewStatusDelegate?.viewExpanded(view: currentView)
         
         currentVisibleViewIndex += 1
         customViewHeightBuffer += Constants.verticalViewPadding

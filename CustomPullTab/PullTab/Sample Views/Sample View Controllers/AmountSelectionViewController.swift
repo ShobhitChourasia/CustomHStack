@@ -22,3 +22,15 @@ class AmountSelectionViewController: CustomViewController<AmountSelectionView> {
     }
 
 }
+
+private typealias AmountSelectionViewInputMethod = AmountSelectionViewController
+extension AmountSelectionViewInputMethod: CustomViewStateInput {
+    
+    func toggleToCollapsedView() {
+        print("Collapsed AmountSelectionViewInput")
+    }
+    
+    func toggleToExpandedView() {
+        print("Expanded AmountSelectionViewInput")
+    }
+}
