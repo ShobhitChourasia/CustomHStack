@@ -32,22 +32,13 @@ class ViewController: PullTabViewController, PullTabViewControllerStackDelegate 
         
     }
     
-//    override init(customViews: [BaseCustomView]) {
-//        
-//    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func moveToNextView() {
-//        pullViewUp()
-        print("aya bhai, ruk!")
         handleTapGesture()
     }
     
-    deinit {
-        print("deinit view controller")
-    }
 }
 
