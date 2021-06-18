@@ -7,8 +7,14 @@
 
 import UIKit
 
-class PullTabViewController: UIViewController {
+protocol PullTabViewControllerStackDelegate: AnyObject {
 
+    func moveToNextView()
+
+}
+
+public class PullTabViewController: UIViewController {
+    
     private var customViews: [BaseCustomView] = []
     private var customViewTopYPoint: CGFloat = 0
     private var topViewStartPoint: CGFloat {
@@ -42,17 +48,12 @@ class PullTabViewController: UIViewController {
     }
 }
 
-private typealias ViewSetup = PullTabViewController
-private extension ViewSetup {
+//MARK: - Methods to handle moving view up and down
+
+private typealias ViewMovement = PullTabViewController
+extension PullTabViewController {
     
-    func setupViews() {
-        pullViewAtIndex()
-        customViews.forEach {
-            $0.delegate = self
-        }
-    }
-    
-    func pullViewAtIndex() {
+    func pullViewUp() {
         guard currentVisibleViewIndex < customViews.count else { return }
         let currentCustomView = customViews[currentVisibleViewIndex]
         
@@ -65,6 +66,25 @@ private extension ViewSetup {
         view.addSubview(currentCustomView)
     }
     
+    func pullViewDown() {
+        //        UIView.animate(withDuration: 0.5, delay: 0.0, options:[], animations: {
+        //                let screenSize = UIScreen.main.bounds.size
+        //            currentView.transform = CGAffineTransform(translationX: 0, y: screenSize.height * 0.5)
+        //            }, completion: nil)
+    }
+    
+}
+
+private typealias ViewSetup = PullTabViewController
+private extension ViewSetup {
+    
+    func setupViews() {
+        pullViewUp()
+        customViews.forEach {
+            $0.delegate = self
+        }
+    }
+    
 }
 
 private typealias ViewTapGestureHandler = PullTabViewController
@@ -73,19 +93,14 @@ extension ViewTapGestureHandler: CustomViewDelegate {
     func handleTapGesture() {
         guard currentVisibleViewIndex < customViews.count else { return }
         let currentView = customViews[currentVisibleViewIndex]
-        let screenSize = -topViewStartPoint + customViewHeightBuffer
+        let screenSize = -topViewStartPoint + customViewHeightBuffer + Constants.bottomViewPadding
         UIView.animate(withDuration: 0.3, delay: 0.0, options:[], animations: {
             currentView.transform = CGAffineTransform(translationX: 0, y: screenSize)
             }, completion: nil)
         
         currentVisibleViewIndex += 1
         customViewHeightBuffer += Constants.verticalViewPadding
-        pullViewAtIndex()
-//        UIView.animate(withDuration: 0.5, delay: 0.0, options:[], animations: {
-//                let screenSize = UIScreen.main.bounds.size
-//            currentView.transform = CGAffineTransform(translationX: 0, y: screenSize.height * 0.5)
-//            }, completion: nil)
-
+        pullViewUp()
     }
 }
 
@@ -94,6 +109,7 @@ private extension Constant {
     
     enum Constants {
         static let verticalViewPadding: CGFloat = 80
+        static let bottomViewPadding: CGFloat = 12
     }
     
 }

@@ -8,22 +8,20 @@
 import UIKit
 
 class DurationSelectionViewController: CustomViewController<DurationSelectionView> {
-
+    
+    weak var delegate: PullTabViewControllerStackDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         customView.backgroundColor = .brown
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    override func viewDidAppear(_ animated: Bool) {
+        customView.handleButtonTappedClosure = { [weak self] in
+            self?.delegate?.moveToNextView()
+        }
     }
-    */
-
+    
 }
+

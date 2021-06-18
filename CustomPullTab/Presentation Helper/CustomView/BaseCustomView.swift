@@ -17,8 +17,7 @@ open class BaseCustomView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        addGestureRecognizer(tap)
+        setupUI()
     }
     
     required public init?(coder: NSCoder) {
@@ -29,4 +28,12 @@ open class BaseCustomView: UIView {
         delegate?.handleTapGesture()
     }
     
+}
+
+private typealias SetupUI = BaseCustomView
+private extension SetupUI {
+    
+    func setupUI() {
+        layer.cornerRadius = 10
+    }
 }

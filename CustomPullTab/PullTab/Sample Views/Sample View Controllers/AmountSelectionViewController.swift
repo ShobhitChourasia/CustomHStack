@@ -9,21 +9,16 @@ import UIKit
 
 class AmountSelectionViewController: CustomViewController<AmountSelectionView> {
 
+    weak var delegate: PullTabViewControllerStackDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        delegate?.moveToNextView()
         customView.backgroundColor = .blue
-//        self.customView.setupViews()
-    }
-    
+        customView.handleButtonTappedClosure = { [weak self] in
+            self?.delegate?.moveToNextView()
+        }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
 
 }

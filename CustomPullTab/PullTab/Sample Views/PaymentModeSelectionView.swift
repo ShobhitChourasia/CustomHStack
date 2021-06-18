@@ -21,6 +21,7 @@ class PaymentModeSelectionView: BaseCustomView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .red
         addSubview(tempLabel)
         NSLayoutConstraint.activate([
             tempLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
@@ -32,4 +33,5 @@ class PaymentModeSelectionView: BaseCustomView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
