@@ -20,7 +20,11 @@ class DurationSelectionViewController: CustomViewController<DurationSelectionVie
     
     override func viewDidAppear(_ animated: Bool) {
         customView.handleButtonTappedClosure = { [weak self] in
-            self?.delegate?.moveToNextView()
+            self?.delegate?.expandView()
+        }
+        
+        customView.handleDownButtonTappedClosure = { [weak self] in
+            self?.delegate?.collapseView()
         }
     }
     
@@ -29,12 +33,12 @@ class DurationSelectionViewController: CustomViewController<DurationSelectionVie
 private typealias DurationSelectionViewInputMethod = DurationSelectionViewController
 extension DurationSelectionViewInputMethod: CustomViewStateInput {
     
-    func toggleToCollapsedView() {
-        print("Collapsed DurationSelectionView")
+    func toggleToExpandedView() {
+        customView.backgroundColor = .cyan
     }
     
-    func toggleToExpandedView() {
-        print("Expanded DurationSelectionView")
+    func toggleToCollapsedView() {
+        print("Collapsed DurationSelectionView")
     }
     
 }

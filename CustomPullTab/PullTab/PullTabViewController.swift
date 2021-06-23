@@ -8,9 +8,10 @@
 import UIKit
 
 protocol PullTabViewControllerStackDelegate: AnyObject {
-
-    func moveToNextView()
-
+    
+    func expandView()
+    func collapseView()
+    
 }
 
 protocol PullTabViewControllerStatusDelegate: AnyObject {
@@ -33,7 +34,7 @@ public class PullTabViewController: UIViewController {
     private var customViewsCount: Int {
         return customViews.count
     }
-    private var currentVisibleViewIndex = 0
+    private var currentVisibleViewIndex = -1
     
     public var customViewHeightBuffer: CGFloat = 0
     
@@ -63,25 +64,48 @@ private typealias ViewMovement = PullTabViewController
 extension PullTabViewController {
     
     func pullViewUp() {
+        
+        currentVisibleViewIndex += 1
+        customViewHeightBuffer += Constants.verticalViewPadding
+        
         guard currentVisibleViewIndex < customViews.count else { return }
         let currentCustomView = customViews[currentVisibleViewIndex]
-        
-        let diff = currentVisibleViewIndex == customViews.count - 1 ? 1 : currentVisibleViewIndex
-        let height = topViewStartPoint - (Constants.verticalViewPadding * CGFloat(diff))
-
+        let height = topViewStartPoint - (Constants.verticalViewPadding * CGFloat(currentCustomView.tag))
         customViewTopYPoint = view.frame.height - Constants.verticalViewPadding
         currentCustomView.frame = CGRect(x: 0, y: customViewTopYPoint, width: view.frame.width, height: height)
         
-        view.addSubview(currentCustomView)
+        if !view.subviews.contains(currentCustomView) {
+            view.addSubview(currentCustomView)
+        }
     }
     
     func pullViewDown() {
-        //        UIView.animate(withDuration: 0.5, delay: 0.0, options:[], animations: {
-        //                let screenSize = UIScreen.main.bounds.size
-        //            currentView.transform = CGAffineTransform(translationX: 0, y: screenSize.height * 0.5)
-        //            }, completion: nil)
+        
+        currentVisibleViewIndex -= 1
+        customViewHeightBuffer -= Constants.verticalViewPadding
+        
+        // If last view
+        if currentVisibleViewIndex == customViews.count - 1 {
+            //        guard !(currentVisibleViewIndex < 0) else { return }
+            let currentViewNew = customViews[currentVisibleViewIndex]
+            UIView.animate(withDuration: 0.3, delay: 0.0, options:[], animations: {
+                let diff = (Constants.verticalViewPadding * CGFloat(self.customViews.count - currentViewNew.tag))
+                currentViewNew.frame.origin.y = self.view.frame.height - diff
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            
+            
+        } else {
+            // Any view with next view
+            let viewToHide = customViews[currentVisibleViewIndex + 1]
+            let viewToCollapse = customViews[currentVisibleViewIndex]
+            UIView.animate(withDuration: 0.3, delay: 0.0, options:[], animations: {
+                viewToHide.frame.origin.y = self.view.frame.height
+                viewToCollapse.frame.origin.y = self.view.frame.height - Constants.verticalViewPadding
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
     }
-    
 }
 
 private typealias ViewSetup = PullTabViewController
@@ -89,8 +113,9 @@ private extension ViewSetup {
     
     func setupViews() {
         pullViewUp()
-        customViews.forEach {
-            $0.delegate = self
+        for (index, element) in customViews.enumerated() {
+            element.delegate = self
+            element.tag = index
         }
     }
     
@@ -102,15 +127,14 @@ extension ViewTapGestureHandler: CustomViewDelegate {
     func handleTapGesture() {
         guard currentVisibleViewIndex < customViews.count else { return }
         let currentView = customViews[currentVisibleViewIndex]
-        let screenSize = -topViewStartPoint + customViewHeightBuffer + Constants.bottomViewPadding
+        let viewHeight = view.frame.height - topViewStartPoint + customViewHeightBuffer + Constants.bottomViewPadding
         UIView.animate(withDuration: 0.3, delay: 0.0, options:[], animations: {
-            currentView.transform = CGAffineTransform(translationX: 0, y: screenSize)
-            }, completion: nil)
+            currentView.frame.origin.y = viewHeight
+            self.view.layoutIfNeeded()
+        }, completion: nil)
         
         viewStatusDelegate?.viewExpanded(view: currentView)
         
-        currentVisibleViewIndex += 1
-        customViewHeightBuffer += Constants.verticalViewPadding
         pullViewUp()
     }
 }

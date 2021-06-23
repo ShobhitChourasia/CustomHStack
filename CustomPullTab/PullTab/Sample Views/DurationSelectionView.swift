@@ -10,6 +10,7 @@ import UIKit
 class DurationSelectionView: BaseCustomView {
     
     var handleButtonTappedClosure: (() -> ())?
+    var handleDownButtonTappedClosure: (() -> ())?
     
     let tempLabel: UILabel = {
         let label = UILabel()
@@ -36,10 +37,23 @@ class DurationSelectionView: BaseCustomView {
         return button
     }()
     
+    let downButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .orange
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle("Pull down", for: .normal)
+        button.addTarget(self, action: #selector(downButtonClicked), for: .touchUpInside)
+
+        return button
+    }()
+
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(tempLabel)
         addSubview(searchButton)
+        addSubview(downButton)
         NSLayoutConstraint.activate([
             tempLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             tempLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -48,7 +62,10 @@ class DurationSelectionView: BaseCustomView {
             searchButton.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             searchButton.heightAnchor.constraint(equalToConstant: 40),
             searchButton.widthAnchor.constraint(equalToConstant: 200),
-            searchButton.centerXAnchor.constraint(equalTo: centerXAnchor)
+            searchButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            downButton.leadingAnchor.constraint(equalTo: searchButton.trailingAnchor),
+            downButton.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
     
@@ -60,4 +77,7 @@ class DurationSelectionView: BaseCustomView {
         handleButtonTappedClosure?()
     }
 
+    @objc func downButtonClicked() {
+        handleDownButtonTappedClosure?()
+    }
 }

@@ -13,12 +13,15 @@ class AmountSelectionViewController: CustomViewController<AmountSelectionView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        delegate?.moveToNextView()
+        delegate?.expandView()
         customView.backgroundColor = .blue
-        customView.handleButtonTappedClosure = { [weak self] in
-            self?.delegate?.moveToNextView()
+        customView.handleUpButtonTappedClosure = { [weak self] in
+            self?.delegate?.expandView()
         }
 
+        customView.handleDownButtonTappedClosure = { [weak self] in
+            self?.delegate?.collapseView()
+        }
     }
 
 }
@@ -26,11 +29,13 @@ class AmountSelectionViewController: CustomViewController<AmountSelectionView> {
 private typealias AmountSelectionViewInputMethod = AmountSelectionViewController
 extension AmountSelectionViewInputMethod: CustomViewStateInput {
     
-    func toggleToCollapsedView() {
-        print("Collapsed AmountSelectionViewInput")
+    func toggleToExpandedView() {
+        customView.backgroundColor = .systemBlue
+//        print("Expanded AmountSelectionViewInput")
     }
     
-    func toggleToExpandedView() {
-        print("Expanded AmountSelectionViewInput")
+    func toggleToCollapsedView() {
+//        print("Collapsed AmountSelectionViewInput")
     }
+    
 }
