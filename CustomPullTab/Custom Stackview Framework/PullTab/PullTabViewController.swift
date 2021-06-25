@@ -28,12 +28,9 @@ public class PullTabViewController: UIViewController {
     private var customViews: [BaseCustomView] = []
     private var customViewTopYPoint: CGFloat = 0
     private var topViewStartPoint: CGFloat {
-        return view.frame.height * 2 / 3
+        return view.frame.height * 3 / 4
     }
     
-    private var customViewsCount: Int {
-        return customViews.count
-    }
     private var currentVisibleViewIndex = -1
     
     public var customViewHeightBuffer: CGFloat = 0
@@ -80,7 +77,6 @@ extension PullTabViewController {
     }
     
     func pullViewDown() {
-        
         currentVisibleViewIndex -= 1
         customViewHeightBuffer -= Constants.verticalViewPadding
         
@@ -93,8 +89,6 @@ extension PullTabViewController {
                 currentViewNew.frame.origin.y = self.view.frame.height - diff
                 self.view.layoutIfNeeded()
             }, completion: nil)
-            
-            
         } else {
             // Any view with next view
             let viewToHide = customViews[currentVisibleViewIndex + 1]

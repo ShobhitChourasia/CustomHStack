@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE4A17D9268516CA00AC22DB /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4A17D8268516CA00AC22DB /* ColorExtension.swift */; };
 		EEDC95C326763D8300C654E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC95C226763D8300C654E4 /* AppDelegate.swift */; };
 		EEDC95C526763D8300C654E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC95C426763D8300C654E4 /* SceneDelegate.swift */; };
 		EEDC95C726763D8300C654E4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC95C626763D8300C654E4 /* ViewController.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE4A17D8268516CA00AC22DB /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		EEDC95BF26763D8300C654E4 /* CustomPullTab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomPullTab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEDC95C226763D8300C654E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEDC95C426763D8300C654E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +57,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE4A17D22685160100AC22DB /* Amount Selection */ = {
+			isa = PBXGroup;
+			children = (
+				EEDC95DD26768B3C00C654E4 /* AmountSelectionView.swift */,
+				EEDC95FA2677DDF900C654E4 /* AmountSelectionViewController.swift */,
+			);
+			path = "Amount Selection";
+			sourceTree = "<group>";
+		};
+		EE4A17D32685161400AC22DB /* Duration Selection */ = {
+			isa = PBXGroup;
+			children = (
+				EEDC95FD2677DE0500C654E4 /* DurationSelectionViewController.swift */,
+				EEDC95E026768B4E00C654E4 /* DurationSelectionView.swift */,
+			);
+			path = "Duration Selection";
+			sourceTree = "<group>";
+		};
+		EE4A17D62685166900AC22DB /* Custom Stackview Framework */ = {
+			isa = PBXGroup;
+			children = (
+				EEDC95ED2677D94900C654E4 /* PullTab */,
+			);
+			path = "Custom Stackview Framework";
+			sourceTree = "<group>";
+		};
+		EE4A17D72685169200AC22DB /* Extension Helper */ = {
+			isa = PBXGroup;
+			children = (
+				EE4A17D8268516CA00AC22DB /* ColorExtension.swift */,
+			);
+			path = "Extension Helper";
+			sourceTree = "<group>";
+		};
 		EEDC95B626763D8300C654E4 = {
 			isa = PBXGroup;
 			children = (
@@ -74,11 +110,12 @@
 		EEDC95C126763D8300C654E4 /* CustomPullTab */ = {
 			isa = PBXGroup;
 			children = (
+				EE4A17D62685166900AC22DB /* Custom Stackview Framework */,
 				EEDC95EA2677D91400C654E4 /* Model */,
 				EEDC95EB2677D91E00C654E4 /* View */,
 				EEDC95EC2677D92900C654E4 /* ViewModel */,
-				EEDC95ED2677D94900C654E4 /* PullTab */,
 				EEDC95EE2677D96300C654E4 /* Presentation Helper */,
+				EE4A17D72685169200AC22DB /* Extension Helper */,
 				EEDC95C226763D8300C654E4 /* AppDelegate.swift */,
 				EEDC95C426763D8300C654E4 /* SceneDelegate.swift */,
 				EEDC95C626763D8300C654E4 /* ViewController.swift */,
@@ -87,17 +124,6 @@
 				EEDC95D026763D8400C654E4 /* Info.plist */,
 			);
 			path = CustomPullTab;
-			sourceTree = "<group>";
-		};
-		EEDC95DC26768B1600C654E4 /* Sample Views */ = {
-			isa = PBXGroup;
-			children = (
-				EEDC95F92677DDDB00C654E4 /* Sample View Controllers */,
-				EEDC95DD26768B3C00C654E4 /* AmountSelectionView.swift */,
-				EEDC95E026768B4E00C654E4 /* DurationSelectionView.swift */,
-				EEDC95E32676909000C654E4 /* PaymentModeSelectionView.swift */,
-			);
-			path = "Sample Views";
 			sourceTree = "<group>";
 		};
 		EEDC95E62676965900C654E4 /* CustomView */ = {
@@ -120,6 +146,9 @@
 		EEDC95EB2677D91E00C654E4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EE4A17D32685161400AC22DB /* Duration Selection */,
+				EE4A17D22685160100AC22DB /* Amount Selection */,
+				EEDC95F92677DDDB00C654E4 /* Payment Mode Selection */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -134,7 +163,6 @@
 		EEDC95ED2677D94900C654E4 /* PullTab */ = {
 			isa = PBXGroup;
 			children = (
-				EEDC95DC26768B1600C654E4 /* Sample Views */,
 				EEDC95D926763F7A00C654E4 /* PullTabViewController.swift */,
 			);
 			path = PullTab;
@@ -148,14 +176,13 @@
 			path = "Presentation Helper";
 			sourceTree = "<group>";
 		};
-		EEDC95F92677DDDB00C654E4 /* Sample View Controllers */ = {
+		EEDC95F92677DDDB00C654E4 /* Payment Mode Selection */ = {
 			isa = PBXGroup;
 			children = (
-				EEDC95FA2677DDF900C654E4 /* AmountSelectionViewController.swift */,
-				EEDC95FD2677DE0500C654E4 /* DurationSelectionViewController.swift */,
 				EEDC96002677DE1100C654E4 /* PaymentModeSelectionViewController.swift */,
+				EEDC95E32676909000C654E4 /* PaymentModeSelectionView.swift */,
 			);
-			path = "Sample View Controllers";
+			path = "Payment Mode Selection";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +259,7 @@
 				EEDC95F42677DC5E00C654E4 /* BasePullTabViewController.swift in Sources */,
 				EEDC95DE26768B3C00C654E4 /* AmountSelectionView.swift in Sources */,
 				EEDC95FB2677DDF900C654E4 /* AmountSelectionViewController.swift in Sources */,
+				EE4A17D9268516CA00AC22DB /* ColorExtension.swift in Sources */,
 				EEDC95E126768B4E00C654E4 /* DurationSelectionView.swift in Sources */,
 				EEDC95C726763D8300C654E4 /* ViewController.swift in Sources */,
 				EEDC95DA26763F7A00C654E4 /* PullTabViewController.swift in Sources */,
