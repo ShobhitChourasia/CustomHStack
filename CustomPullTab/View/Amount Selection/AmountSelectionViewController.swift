@@ -14,7 +14,7 @@ class AmountSelectionViewController: CustomViewController<AmountSelectionView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate?.expandView()
-        customView.backgroundColor = .blue
+        
         customView.handleUpButtonTappedClosure = { [weak self] in
             self?.delegate?.expandView()
         }
@@ -30,7 +30,6 @@ private typealias AmountSelectionViewInputMethod = AmountSelectionViewController
 extension AmountSelectionViewInputMethod: CustomViewStateInput {
     
     func toggleToExpandedView() {
-        customView.backgroundColor = .systemBlue
 //        print("Expanded AmountSelectionViewInput")
     }
     

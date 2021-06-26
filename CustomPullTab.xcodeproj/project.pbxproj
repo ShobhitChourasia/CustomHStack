@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE0AC0F42687B0EE00D54372 /* DurationSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0AC0F32687B0EE00D54372 /* DurationSelectionCollectionViewCell.swift */; };
+		EE0AC0F92687B69300D54372 /* EMIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0AC0F82687B69300D54372 /* EMIData.swift */; };
 		EE4A17D9268516CA00AC22DB /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4A17D8268516CA00AC22DB /* ColorExtension.swift */; };
 		EEDC95C326763D8300C654E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC95C226763D8300C654E4 /* AppDelegate.swift */; };
 		EEDC95C526763D8300C654E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDC95C426763D8300C654E4 /* SceneDelegate.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE0AC0F32687B0EE00D54372 /* DurationSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		EE0AC0F82687B69300D54372 /* EMIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EMIData.swift; sourceTree = "<group>"; };
 		EE4A17D8268516CA00AC22DB /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		EEDC95BF26763D8300C654E4 /* CustomPullTab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomPullTab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEDC95C226763D8300C654E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +61,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE0AC0F22687B0CD00D54372 /* Collection View Cell */ = {
+			isa = PBXGroup;
+			children = (
+				EE0AC0F72687B67D00D54372 /* Cell Dummy Data */,
+				EE0AC0F32687B0EE00D54372 /* DurationSelectionCollectionViewCell.swift */,
+			);
+			path = "Collection View Cell";
+			sourceTree = "<group>";
+		};
+		EE0AC0F72687B67D00D54372 /* Cell Dummy Data */ = {
+			isa = PBXGroup;
+			children = (
+				EE0AC0F82687B69300D54372 /* EMIData.swift */,
+			);
+			path = "Cell Dummy Data";
+			sourceTree = "<group>";
+		};
 		EE4A17D22685160100AC22DB /* Amount Selection */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,8 +90,9 @@
 		EE4A17D32685161400AC22DB /* Duration Selection */ = {
 			isa = PBXGroup;
 			children = (
-				EEDC95FD2677DE0500C654E4 /* DurationSelectionViewController.swift */,
+				EE0AC0F22687B0CD00D54372 /* Collection View Cell */,
 				EEDC95E026768B4E00C654E4 /* DurationSelectionView.swift */,
+				EEDC95FD2677DE0500C654E4 /* DurationSelectionViewController.swift */,
 			);
 			path = "Duration Selection";
 			sourceTree = "<group>";
@@ -146,8 +168,8 @@
 		EEDC95EB2677D91E00C654E4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				EE4A17D32685161400AC22DB /* Duration Selection */,
 				EE4A17D22685160100AC22DB /* Amount Selection */,
+				EE4A17D32685161400AC22DB /* Duration Selection */,
 				EEDC95F92677DDDB00C654E4 /* Payment Mode Selection */,
 			);
 			path = View;
@@ -260,12 +282,14 @@
 				EEDC95DE26768B3C00C654E4 /* AmountSelectionView.swift in Sources */,
 				EEDC95FB2677DDF900C654E4 /* AmountSelectionViewController.swift in Sources */,
 				EE4A17D9268516CA00AC22DB /* ColorExtension.swift in Sources */,
+				EE0AC0F42687B0EE00D54372 /* DurationSelectionCollectionViewCell.swift in Sources */,
 				EEDC95E126768B4E00C654E4 /* DurationSelectionView.swift in Sources */,
 				EEDC95C726763D8300C654E4 /* ViewController.swift in Sources */,
 				EEDC95DA26763F7A00C654E4 /* PullTabViewController.swift in Sources */,
 				EEDC95FE2677DE0500C654E4 /* DurationSelectionViewController.swift in Sources */,
 				EEDC95C326763D8300C654E4 /* AppDelegate.swift in Sources */,
 				EEDC95F72677DC7B00C654E4 /* CustomViewController.swift in Sources */,
+				EE0AC0F92687B69300D54372 /* EMIData.swift in Sources */,
 				EEDC95E42676909000C654E4 /* PaymentModeSelectionView.swift in Sources */,
 				EEDC95C526763D8300C654E4 /* SceneDelegate.swift in Sources */,
 			);
