@@ -122,13 +122,21 @@ extension DelegateHandler: PullTabViewControllerStatusDelegate {
         case is DurationSelectionView:
             viewControllerTwo.toggleToExpandedView()
         case is PaymentModeSelectionView:
-            ()
+            viewControllerTHree.toggleToExpandedView()
         default: break
         }
     }
     
-    func viewCollapsed() {
-        
+    func viewCollapsed(view: UIView) {
+        switch view {
+        case is AmountSelectionView:
+            viewControllerOne.toggleToCollapsedView()
+        case is DurationSelectionView:
+            viewControllerTwo.toggleToCollapsedView()
+        case is PaymentModeSelectionView:
+            viewControllerTHree.toggleToCollapsedView()
+        default: break
+        }
     }
     
 }

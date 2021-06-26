@@ -201,8 +201,8 @@
 		EEDC95F92677DDDB00C654E4 /* Payment Mode Selection */ = {
 			isa = PBXGroup;
 			children = (
-				EEDC96002677DE1100C654E4 /* PaymentModeSelectionViewController.swift */,
 				EEDC95E32676909000C654E4 /* PaymentModeSelectionView.swift */,
+				EEDC96002677DE1100C654E4 /* PaymentModeSelectionViewController.swift */,
 			);
 			path = "Payment Mode Selection";
 			sourceTree = "<group>";

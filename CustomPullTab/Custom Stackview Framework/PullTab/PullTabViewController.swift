@@ -16,7 +16,7 @@ protocol PullTabViewControllerStackDelegate: AnyObject {
 
 protocol PullTabViewControllerStatusDelegate: AnyObject {
     
-    func viewCollapsed()
+    func viewCollapsed(view: UIView)
     func viewExpanded(view: UIView)
     
 }
@@ -84,6 +84,7 @@ extension PullTabViewController {
         if currentVisibleViewIndex == customViews.count - 1 {
             //        guard !(currentVisibleViewIndex < 0) else { return }
             let currentViewNew = customViews[currentVisibleViewIndex]
+            viewStatusDelegate?.viewCollapsed(view: currentViewNew)
             UIView.animate(withDuration: 0.3, delay: 0.0, options:[], animations: {
                 let diff = (Constants.verticalViewPadding * CGFloat(self.customViews.count - currentViewNew.tag))
                 currentViewNew.frame.origin.y = self.view.frame.height - diff
@@ -93,6 +94,7 @@ extension PullTabViewController {
             // Any view with next view
             let viewToHide = customViews[currentVisibleViewIndex + 1]
             let viewToCollapse = customViews[currentVisibleViewIndex]
+            viewStatusDelegate?.viewCollapsed(view: viewToCollapse)
             UIView.animate(withDuration: 0.3, delay: 0.0, options:[], animations: {
                 viewToHide.frame.origin.y = self.view.frame.height
                 viewToCollapse.frame.origin.y = self.view.frame.height - Constants.verticalViewPadding

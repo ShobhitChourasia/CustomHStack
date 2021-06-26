@@ -30,11 +30,16 @@ private typealias PaymentModeSelectionViewInputMethod = PaymentModeSelectionView
 extension PaymentModeSelectionViewInputMethod: CustomViewStateInput {
     
     func toggleToExpandedView() {
-        customView.backgroundColor = .magenta
+        customView.collapsedTitleContainerView.isHidden = true
+        customView.expandedTitleContainerView.isHidden = false
+        customView.updateBackgroundColor(isExpanded: true)
     }
     
     func toggleToCollapsedView() {
-        print("Collapsed DurationSelectionView")
+        customView.collapsedTitleContainerView.isHidden = false
+        customView.expandedTitleContainerView.isHidden = true
+        customView.updateBackgroundColor(isExpanded: false)
     }
+    
     
 }

@@ -42,6 +42,8 @@ extension DurationSelectionViewInputMethod: CustomViewStateInput {
     }
     
     func toggleToCollapsedView() {
+        customView.collapsedTitleContainerView.isHidden = false
+        customView.expandedTitleContainerView.isHidden = true
         customView.updateBackgroundColor(isExpanded: false)
     }
     
