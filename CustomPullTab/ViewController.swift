@@ -24,7 +24,6 @@ class ViewController: PullTabViewController, PullTabViewControllerStackDelegate 
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Pull down", for: .normal)
         button.addTarget(self, action: #selector(downButtonClicked), for: .touchUpInside)
-
         return button
     }()
 
@@ -35,11 +34,9 @@ class ViewController: PullTabViewController, PullTabViewControllerStackDelegate 
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Pull up", for: .normal)
         button.addTarget(self, action: #selector(upButtonClicked), for: .touchUpInside)
-
         return button
     }()
 
-    
     @objc func downButtonClicked() {
         pullViewDown()
     }
