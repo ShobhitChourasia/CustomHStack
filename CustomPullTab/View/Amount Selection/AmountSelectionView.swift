@@ -19,7 +19,15 @@ class AmountSelectionView: BaseCustomView {
         return view
     }()
     
-    private let titleLabel: UILabel = {
+    let expandedTitleContainerView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.customBlackColor()
+        return view
+    }()
+    
+    private let expandedTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "nikunj, how much do you need?"
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +37,7 @@ class AmountSelectionView: BaseCustomView {
         return label
     }()
     
-    private let subTitleLabel: UILabel = {
+    private let expandedSubTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "move the dial and set any amount you need upto ₹487,981"
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -57,50 +65,48 @@ class AmountSelectionView: BaseCustomView {
         return label
     }()
     
-//    let tempLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "Loading temp..."
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.textColor = UIColor.customGreyTextColor()
-//        label.font = UIFont.boldSystemFont(ofSize: 15)
-//        label.textAlignment = .left
-//        return label
-//    }()
-//
-//    let pullUpButton: UIButton = {
-//        let button = UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.backgroundColor = .black
-//        button.setTitleColor(.white, for: .normal)
-//        button.setTitle("Pull Up", for: .normal)
-//        button.addTarget(self, action: #selector(upButtonClicked), for: .touchUpInside)
-//
-//        return button
-//    }()
-//
-//
-//    let downButton: UIButton = {
-//        let button = UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.backgroundColor = .brown
-//        button.setTitleColor(.white, for: .normal)
-//        button.setTitle("Pull down", for: .normal)
-//        button.addTarget(self, action: #selector(downButtonClicked), for: .touchUpInside)
-//
-//        return button
-//    }()
+    let collapsedTitleContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.customPurpleColor()
+        return view
+    }()
 
+    private let collapsedTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Yes, I need some credit"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.customPinkTextColor()
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textAlignment = .center
+        return label
+    }()
+
+    let pullUpButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .clear
+        button.isUserInteractionEnabled = true
+        button.addTarget(self, action: #selector(upButtonClicked), for: .touchUpInside)
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.customBlackColor()
+        backgroundColor = UIColor.customPurpleColor()
         
-        titleContainerView.addSubview(titleLabel)
-        titleContainerView.addSubview(subTitleLabel)
-        addSubview(titleContainerView)
+        titleContainerView.addSubview(collapsedTitleContainerView)
+        titleContainerView.addSubview(expandedTitleContainerView)
+        
+        collapsedTitleContainerView.addSubview(collapsedTitleLabel)
+        collapsedTitleContainerView.addSubview(pullUpButton)
+                
+        expandedTitleContainerView.addSubview(expandedTitleLabel)
+        expandedTitleContainerView.addSubview(expandedSubTitleLabel)
         
         rotorView.addSubview(rotorSubtitle)
         addSubview(rotorView)
+        addSubview(titleContainerView)
         
         NSLayoutConstraint.activate([
             titleContainerView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
@@ -108,16 +114,35 @@ class AmountSelectionView: BaseCustomView {
             titleContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
             titleContainerView.heightAnchor.constraint(equalToConstant: 100),
             
-            titleLabel.topAnchor.constraint(equalTo: titleContainerView.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor),
+            expandedTitleContainerView.topAnchor.constraint(equalTo: titleContainerView.topAnchor),
+            expandedTitleContainerView.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor),
+            expandedTitleContainerView.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor),
+            expandedTitleContainerView.bottomAnchor.constraint(equalTo: titleContainerView.bottomAnchor),
             
-            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -44),
-            subTitleLabel.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor),
-            subTitleLabel.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor),
-            subTitleLabel.bottomAnchor.constraint(equalTo: titleContainerView.bottomAnchor),
+            expandedTitleLabel.topAnchor.constraint(equalTo: expandedTitleContainerView.topAnchor),
+            expandedTitleLabel.leadingAnchor.constraint(equalTo: expandedTitleContainerView.leadingAnchor),
+            expandedTitleLabel.trailingAnchor.constraint(equalTo: expandedTitleContainerView.trailingAnchor),
             
-            rotorView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: -32),
+            expandedSubTitleLabel.topAnchor.constraint(equalTo: expandedTitleLabel.bottomAnchor, constant: -44),
+            expandedSubTitleLabel.leadingAnchor.constraint(equalTo: expandedTitleContainerView.leadingAnchor),
+            expandedSubTitleLabel.trailingAnchor.constraint(equalTo: expandedTitleContainerView.trailingAnchor),
+            expandedSubTitleLabel.bottomAnchor.constraint(equalTo: expandedTitleContainerView.bottomAnchor),
+            
+            collapsedTitleContainerView.topAnchor.constraint(equalTo: titleContainerView.topAnchor),
+            collapsedTitleContainerView.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor),
+            collapsedTitleContainerView.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor),
+            collapsedTitleContainerView.bottomAnchor.constraint(equalTo: titleContainerView.bottomAnchor),
+            
+            pullUpButton.topAnchor.constraint(equalTo: collapsedTitleContainerView.topAnchor),
+            pullUpButton.leadingAnchor.constraint(equalTo: collapsedTitleContainerView.leadingAnchor),
+            pullUpButton.trailingAnchor.constraint(equalTo: collapsedTitleContainerView.trailingAnchor),
+            pullUpButton.bottomAnchor.constraint(equalTo: collapsedTitleContainerView.bottomAnchor),
+            
+            collapsedTitleLabel.topAnchor.constraint(equalTo: collapsedTitleContainerView.topAnchor, constant: 16),
+            collapsedTitleLabel.leadingAnchor.constraint(equalTo: collapsedTitleContainerView.leadingAnchor),
+            collapsedTitleLabel.trailingAnchor.constraint(equalTo: collapsedTitleContainerView.trailingAnchor),
+            
+            rotorView.topAnchor.constraint(equalTo: titleContainerView.bottomAnchor, constant: -32),
             rotorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
             rotorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
             rotorView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -250),
@@ -140,4 +165,9 @@ class AmountSelectionView: BaseCustomView {
     @objc func downButtonClicked() {
         handleDownButtonTappedClosure?()
     }
+    
+    func updateBackgroundColor(isExpanded: Bool) {
+        backgroundColor = isExpanded ? UIColor.customBlackColor() : UIColor.customPurpleColor()
+    }
+
 }

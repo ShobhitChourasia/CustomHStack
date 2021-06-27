@@ -11,6 +11,7 @@ protocol CustomViewStateInput {
     
     func toggleToCollapsedView()
     func toggleToExpandedView()
+    func handleMinimizedView()
     
 }
 
@@ -49,19 +50,14 @@ class ViewController: PullTabViewController, PullTabViewControllerStackDelegate 
 
     private let viewControllerOne: AmountSelectionViewController
     private let viewControllerTwo: DurationSelectionViewController
-    private let viewControllerTHree: PaymentModeSelectionViewController
+    private let viewControllerThree: PaymentModeSelectionViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         view.addSubview(upButton)
         view.addSubview(downButton)
         NSLayoutConstraint.activate([
-//            tempLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-//            tempLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-//            tempLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
             upButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
             upButton.heightAnchor.constraint(equalToConstant: 40),
             upButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -72,15 +68,11 @@ class ViewController: PullTabViewController, PullTabViewControllerStackDelegate 
             downButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             downButton.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-
-        
-        
-        
         
         view.backgroundColor = .white
         viewControllerOne.delegate = self
         viewControllerTwo.delegate = self
-        viewControllerTHree.delegate = self
+        viewControllerThree.delegate = self
         
         viewStatusDelegate = self
     }
@@ -91,7 +83,7 @@ class ViewController: PullTabViewController, PullTabViewControllerStackDelegate 
         
         self.viewControllerOne = viewControllerOne
         self.viewControllerTwo = viewControllerTwo
-        self.viewControllerTHree = viewControllerThree
+        self.viewControllerThree = viewControllerThree
         
         super.init(customViews: [viewControllerOne.customView, viewControllerTwo.customView, viewControllerThree.customView])
         
@@ -122,7 +114,7 @@ extension DelegateHandler: PullTabViewControllerStatusDelegate {
         case is DurationSelectionView:
             viewControllerTwo.toggleToExpandedView()
         case is PaymentModeSelectionView:
-            viewControllerTHree.toggleToExpandedView()
+            viewControllerThree.toggleToExpandedView()
         default: break
         }
     }
@@ -134,7 +126,19 @@ extension DelegateHandler: PullTabViewControllerStatusDelegate {
         case is DurationSelectionView:
             viewControllerTwo.toggleToCollapsedView()
         case is PaymentModeSelectionView:
-            viewControllerTHree.toggleToCollapsedView()
+            viewControllerThree.toggleToCollapsedView()
+        default: break
+        }
+    }
+    
+    func previousViewMinimized(view: UIView) {
+        switch view {
+        case is AmountSelectionView:
+            viewControllerOne.handleMinimizedView()
+        case is DurationSelectionView:
+            viewControllerTwo.handleMinimizedView()
+        case is PaymentModeSelectionView:
+            viewControllerThree.handleMinimizedView()
         default: break
         }
     }

@@ -28,7 +28,6 @@ class DurationSelectionView: BaseCustomView {
         view.backgroundColor = UIColor.customPurpleColor()
         return view
     }()
-
     
     private let collapsedTitleLabel: UILabel = {
         let label = UILabel()
@@ -90,6 +89,44 @@ class DurationSelectionView: BaseCustomView {
         return view
     }()
     
+    let minimizedTitleContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        view.backgroundColor = UIColor.customBlackColor()
+        return view
+    }()
+    
+    private let minimizedTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "EMI"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.customPinkTextColor()
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.textAlignment = .left
+        return label
+    }()
+
+    private let minimizedSubTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "₹4247/mo"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.customGreyTextColor()
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textAlignment = .left
+        return label
+    }()
+
+    let pullDownButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .clear
+        button.isUserInteractionEnabled = true
+        button.addTarget(self, action: #selector(handlePullUpButton), for: .touchUpInside)
+        return button
+    }()
+
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -97,14 +134,19 @@ class DurationSelectionView: BaseCustomView {
         
         titleContainerView.addSubview(collapsedTitleContainerView)
         titleContainerView.addSubview(expandedTitleContainerView)
+        titleContainerView.addSubview(minimizedTitleContainerView)
         
         collapsedTitleContainerView.addSubview(collapsedTitleLabel)
         collapsedTitleContainerView.addSubview(pullUpButton)
-        addSubview(titleContainerView)
         
         expandedTitleContainerView.addSubview(expandedTitleLabel)
         expandedTitleContainerView.addSubview(expandedSubTitleLabel)
+        
+        minimizedTitleContainerView.addSubview(minimizedTitleLabel)
+        minimizedTitleContainerView.addSubview(minimizedSubTitleLabel)
+        
         addSubview(collectionView)
+        addSubview(titleContainerView)
         
         NSLayoutConstraint.activate([
             titleContainerView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
@@ -144,6 +186,20 @@ class DurationSelectionView: BaseCustomView {
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             collectionView.heightAnchor.constraint(equalToConstant: 200),
+            
+            minimizedTitleContainerView.topAnchor.constraint(equalTo: titleContainerView.topAnchor),
+            minimizedTitleContainerView.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor),
+            minimizedTitleContainerView.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor),
+            minimizedTitleContainerView.bottomAnchor.constraint(equalTo: titleContainerView.bottomAnchor),
+            
+            minimizedTitleLabel.topAnchor.constraint(equalTo: minimizedTitleContainerView.topAnchor),
+            minimizedTitleLabel.leadingAnchor.constraint(equalTo: minimizedTitleContainerView.leadingAnchor),
+            minimizedTitleLabel.trailingAnchor.constraint(equalTo: minimizedTitleContainerView.trailingAnchor),
+            
+            minimizedSubTitleLabel.topAnchor.constraint(equalTo: minimizedTitleLabel.bottomAnchor, constant: -44),
+            minimizedSubTitleLabel.leadingAnchor.constraint(equalTo: minimizedTitleContainerView.leadingAnchor),
+            minimizedSubTitleLabel.trailingAnchor.constraint(equalTo: minimizedTitleContainerView.trailingAnchor),
+            minimizedSubTitleLabel.bottomAnchor.constraint(equalTo: minimizedTitleContainerView.bottomAnchor)
         ])
     }
     

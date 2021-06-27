@@ -38,21 +38,30 @@ extension DurationSelectionViewInputMethod: CustomViewStateInput {
     func toggleToExpandedView() {
         customView.collapsedTitleContainerView.isHidden = true
         customView.expandedTitleContainerView.isHidden = false
+        customView.minimizedTitleContainerView.isHidden = true
         customView.updateBackgroundColor(isExpanded: true)
     }
     
     func toggleToCollapsedView() {
         customView.collapsedTitleContainerView.isHidden = false
         customView.expandedTitleContainerView.isHidden = true
+        customView.minimizedTitleContainerView.isHidden = true
         customView.updateBackgroundColor(isExpanded: false)
     }
     
+    func handleMinimizedView() {
+        customView.backgroundColor = .blue
+        customView.minimizedTitleContainerView.isHidden = false
+        customView.collapsedTitleContainerView.isHidden = true
+        customView.expandedTitleContainerView.isHidden = true
+        customView.updateBackgroundColor(isExpanded: true)
+    }
+
     func setupCollectionView() {
         customView.collectionView.delegate = self
         customView.collectionView.dataSource = self
     }
 
-    
 }
 
 private typealias CollectionViewDataHandler = DurationSelectionViewController

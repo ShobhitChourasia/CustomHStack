@@ -41,5 +41,8 @@ extension PaymentModeSelectionViewInputMethod: CustomViewStateInput {
         customView.updateBackgroundColor(isExpanded: false)
     }
     
-    
+    func handleMinimizedView() {
+        customView.backgroundColor = .blue
+    }
+
 }

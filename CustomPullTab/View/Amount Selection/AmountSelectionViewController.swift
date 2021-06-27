@@ -30,11 +30,16 @@ private typealias AmountSelectionViewInputMethod = AmountSelectionViewController
 extension AmountSelectionViewInputMethod: CustomViewStateInput {
     
     func toggleToExpandedView() {
-//        print("Expanded AmountSelectionViewInput")
+        customView.collapsedTitleContainerView.isHidden = true
+        customView.expandedTitleContainerView.isHidden = false
+        customView.updateBackgroundColor(isExpanded: true)
     }
     
     func toggleToCollapsedView() {
-//        print("Collapsed AmountSelectionViewInput")
+        customView.collapsedTitleContainerView.isHidden = false
+        customView.expandedTitleContainerView.isHidden = true
+        customView.updateBackgroundColor(isExpanded: false)
     }
     
+    func handleMinimizedView() {}
 }

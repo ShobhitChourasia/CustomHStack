@@ -8,32 +8,29 @@
 import UIKit
 
 protocol PullTabViewControllerStackDelegate: AnyObject {
-    
     func expandView()
     func collapseView()
-    
 }
 
 protocol PullTabViewControllerStatusDelegate: AnyObject {
-    
     func viewCollapsed(view: UIView)
     func viewExpanded(view: UIView)
-    
+    func previousViewMinimized(view: UIView)
 }
 
 public class PullTabViewController: UIViewController {
     
     weak var viewStatusDelegate: PullTabViewControllerStatusDelegate?
     
-    private var customViews: [BaseCustomView] = []
-    private var customViewTopYPoint: CGFloat = 0
-    private var topViewStartPoint: CGFloat {
+    //Public properties to customise UI
+    public var topViewStartPoint: CGFloat {
         return view.frame.height * 3 / 4
     }
-    
-    private var currentVisibleViewIndex = -1
-    
     public var customViewHeightBuffer: CGFloat = 0
+    
+    private var customViews: [BaseCustomView] = []
+    private var customViewTopYPoint: CGFloat = 0
+    private var currentVisibleViewIndex = -1
     
     convenience init() {
         self.init(customViews: [])
@@ -82,9 +79,9 @@ extension PullTabViewController {
         
         // If last view
         if currentVisibleViewIndex == customViews.count - 1 {
-            //        guard !(currentVisibleViewIndex < 0) else { return }
             let currentViewNew = customViews[currentVisibleViewIndex]
             viewStatusDelegate?.viewCollapsed(view: currentViewNew)
+            handleExpandView(index: currentVisibleViewIndex - 1)
             UIView.animate(withDuration: 0.3, delay: 0.0, options:[], animations: {
                 let diff = (Constants.verticalViewPadding * CGFloat(self.customViews.count - currentViewNew.tag))
                 currentViewNew.frame.origin.y = self.view.frame.height - diff
@@ -95,6 +92,7 @@ extension PullTabViewController {
             let viewToHide = customViews[currentVisibleViewIndex + 1]
             let viewToCollapse = customViews[currentVisibleViewIndex]
             viewStatusDelegate?.viewCollapsed(view: viewToCollapse)
+            handleExpandView(index: currentVisibleViewIndex - 1)
             UIView.animate(withDuration: 0.3, delay: 0.0, options:[], animations: {
                 viewToHide.frame.origin.y = self.view.frame.height
                 viewToCollapse.frame.origin.y = self.view.frame.height - Constants.verticalViewPadding
@@ -115,6 +113,12 @@ private extension ViewSetup {
         }
     }
     
+    func handleExpandView(index: Int) {
+        if index <= customViews.count - 1 && index >= 0 {
+            viewStatusDelegate?.viewExpanded(view: customViews[index])
+        }
+    }
+    
 }
 
 private typealias ViewTapGestureHandler = PullTabViewController
@@ -128,16 +132,18 @@ extension ViewTapGestureHandler: CustomViewDelegate {
             currentView.frame.origin.y = viewHeight
             self.view.layoutIfNeeded()
         }, completion: nil)
+        if currentVisibleViewIndex > 0 && currentVisibleViewIndex < customViews.count {
+            viewStatusDelegate?.previousViewMinimized(view: customViews[currentVisibleViewIndex - 1])
+        }
         
-        viewStatusDelegate?.viewExpanded(view: currentView)
-        
+        handleExpandView(index: currentVisibleViewIndex)
         pullViewUp()
     }
 }
 
 private typealias Constant = PullTabViewController
 private extension Constant {
-    
+
     enum Constants {
         static let verticalViewPadding: CGFloat = 80
         static let bottomViewPadding: CGFloat = 12
